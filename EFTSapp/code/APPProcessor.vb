@@ -6,8 +6,8 @@ Public Class APPProcessor
 
     Private _newID As Integer
     Private _newName As String
-    Private _newSrcType As SourceType
     Private _newSrc As AbstractProcessSource
+    Private _newDest As New List(Of AbstractProcessDestination)
 
     Public Property ID As Integer
         Get
@@ -25,14 +25,6 @@ Public Class APPProcessor
             _newName = value
         End Set
     End Property
-    Public Property SourceType As SourceType
-        Get
-            Return _newSrcType
-        End Get
-        Protected Set(value As SourceType)
-            _newSrcType = value
-        End Set
-    End Property
     Public Property Source As AbstractProcessSource
         Get
             Return _newSrc
@@ -42,13 +34,19 @@ Public Class APPProcessor
         End Set
     End Property
 
+    Public ReadOnly Property Destinatons As List(Of AbstractProcessDestination)
+        Get
+            Return _newDest
+        End Get
+    End Property
+
     Public Sub New(ProcessID As Integer)
         Try
             Dim sql As String = "select *                                   " +
                                         "from   tbl_procs p                         " +
                                         "       inner join tbl_source s           " +
                                         "           on p.proc_source=s.source_id    " +
-                                        "where  p.id=" + ID.ToString()
+                                        "where  p.id=" + ProcessID.ToString()
             Dim resp = db.SelectData(sql)
             If resp.Success Then
 

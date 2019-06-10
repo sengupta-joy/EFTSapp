@@ -189,7 +189,6 @@ Partial Class Form1
         '
         'tmrUIRefresh
         '
-        Me.tmrUIRefresh.Enabled = True
         Me.tmrUIRefresh.Interval = 1000
         '
         'Form1

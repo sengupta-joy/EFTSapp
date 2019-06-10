@@ -62,7 +62,7 @@ Friend Class Configuration
 
         Try
             For Each r As DataRow In result.Data.Tables(0).Rows
-                dp = New APPProcessor(r(0), r(1))
+                dp = New APPProcessor(r(0))
                 resp.Add(dp)
             Next
         Catch ex As Exception

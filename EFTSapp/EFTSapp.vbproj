@@ -74,13 +74,14 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="code\processDestination\AbstractProcessDestination.vb" />
     <Compile Include="code\appModule.vb" />
     <Compile Include="code\APPProcessor.vb" />
     <Compile Include="code\DB\IDataLayer.vb" />
     <Compile Include="code\DB\ODBCDatalayer.vb" />
     <Compile Include="code\DB\OLEDBDataLayer.vb" />
     <Compile Include="code\DB\SQLDataLayer.vb" />
-    <Compile Include="code\factory\TCPProcessSource.vb" />
+    <Compile Include="code\processSource\TCPProcessSource.vb" />
     <Compile Include="code\processSource\AbstractProcessSource.vb" />
     <Compile Include="code\factory\SourceFactory.vb" />
     <Compile Include="code\SourceType.vb" />

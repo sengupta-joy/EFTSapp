@@ -1,4 +1,5 @@
-﻿Imports System.Windows.Forms.DataVisualization.Charting
+﻿Imports System.Threading
+Imports System.Windows.Forms.DataVisualization.Charting
 
 Public Class Form1
     Dim srv As Service
@@ -6,9 +7,20 @@ Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         srv = New Service()
 
-        srv.start()
+        'srv.start()
         setupUI()
-        tmrUIRefresh.Enabled = True
+        'tmrUIRefresh.Enabled = True
+
+        Dim t As New Threading.Thread(AddressOf test)
+        t.Name = "acbd"
+        Dim x = t.ManagedThreadId
+        t.Start()
+
+
+    End Sub
+
+    Private Sub test()
+
     End Sub
 
     Sub setupUI()
@@ -22,9 +34,6 @@ Public Class Form1
     End Sub
 
 
-    Private Sub ToolStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles ToolStrip1.ItemClicked
-
-    End Sub
 
     Private Sub tmrUIRefresh_Tick(sender As Object, e As EventArgs) Handles tmrUIRefresh.Tick
         Dim x As Process = Process.GetCurrentProcess()

@@ -5,7 +5,7 @@ Friend Class TCPProcessSource : Inherits AbstractProcessSource
     Private sourceID As Integer
 
     Public Sub New(sourceID As Integer)
-        Me.sourceID = sourceID
+        MyBase.New(sourceID)
     End Sub
 
     Public Overrides Sub start()
