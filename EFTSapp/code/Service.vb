@@ -1,7 +1,24 @@
 ﻿Friend Class Service
-    Friend Shared Sub start(setting As Settings)
 
-        For Each p In setting.Process
+    Private _cnfg As Configuration
+
+    Public Property config As Configuration
+        Get
+            Return _cnfg
+        End Get
+        Private Set(value As Configuration)
+            _cnfg = value
+        End Set
+    End Property
+
+
+    Public Sub New()
+        config = Configuration.getConfig()
+    End Sub
+
+    Public Sub start()
+
+        For Each p As APPProcessor In config.Process
             p.start()
         Next
 

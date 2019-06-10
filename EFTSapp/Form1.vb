@@ -1,24 +1,26 @@
 ﻿Imports System.Windows.Forms.DataVisualization.Charting
 
 Public Class Form1
+    Dim srv As Service
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        srv = New Service()
+
+        srv.start()
+        setupUI()
+        tmrUIRefresh.Enabled = True
+    End Sub
+
+    Sub setupUI()
         Dim s As Series = Chart1.Series(0)
+
         s.ChartType = SeriesChartType.Line
         s.Color = Color.Red
         s.Points.AddY(My.Application.Info.WorkingSet / 1024 / 1024)
 
-        Dim setting As New Settings()
-        DataGridView1.DataSource = setting.Process
-
-        Service.start(setting)
-
-        'Dim inf As String
-        'inf = "Mem Usage: " & x.WorkingSet64 / 1024 & " K" & vbCrLf _
-        '    & "Paged Memory: " & x.PagedMemorySize64 / 1024 & " K"
-
-        'ToolStripStatusLabel1.Text = inf
-
+        DataGridView1.DataSource = srv.config.Process
     End Sub
+
 
     Private Sub ToolStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles ToolStrip1.ItemClicked
 

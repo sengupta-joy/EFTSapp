@@ -1,7 +1,10 @@
 ﻿Namespace code
-    Enum SourceType
+    Public Enum SourceType
         DB = 1
         TCP_PORT = 2
-        WEB_SERVICE = 3
+        SOAP_SERVICE = 3
+        REST_SERVICE = 4
+        MQ = 5
+        FILE = 6
     End Enum
 End Namespace

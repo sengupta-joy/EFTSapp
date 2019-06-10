@@ -74,8 +74,17 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="code\DataProcessor.vb" />
+    <Compile Include="code\appModule.vb" />
+    <Compile Include="code\APPProcessor.vb" />
+    <Compile Include="code\DB\IDataLayer.vb" />
+    <Compile Include="code\DB\ODBCDatalayer.vb" />
+    <Compile Include="code\DB\OLEDBDataLayer.vb" />
+    <Compile Include="code\DB\SQLDataLayer.vb" />
+    <Compile Include="code\factory\TCPProcessSource.vb" />
+    <Compile Include="code\processSource\AbstractProcessSource.vb" />
+    <Compile Include="code\factory\SourceFactory.vb" />
     <Compile Include="code\SourceType.vb" />
+    <Compile Include="code\DB\SqlResult.vb" />
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -99,7 +108,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="code\Service.vb" />
-    <Compile Include="code\Settings.vb" />
+    <Compile Include="code\Configuration.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
@@ -132,5 +141,6 @@
     </Content>
     <Content Include="MetroFramework.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
