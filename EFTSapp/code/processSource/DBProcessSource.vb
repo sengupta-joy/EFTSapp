@@ -3,8 +3,8 @@
 Friend Class DBProcessSource
     Inherits AbstractProcessSource
 
-    Public Sub New(sourceID As Integer)
-        MyBase.New(sourceID)
+    Public Sub New(sourceID As Integer, process As APPProcessor)
+        MyBase.New(sourceID, process)
     End Sub
 
     Public Overrides Sub start()

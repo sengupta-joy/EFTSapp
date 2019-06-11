@@ -12,19 +12,14 @@ Friend Class TCPProcessSource : Inherits AbstractProcessSource
     Private listenThead As Thread
     Private processThread As Thread
 
-    Public Property InwardQueue As Dictionary(Of Integer, TcpClient)
-        Get
-            Return _inwardQueue
-        End Get
-        Private Set(value As Dictionary(Of Integer, TcpClient))
-            _inwardQueue = value
-        End Set
-    End Property
+    Structure ProcessParam
+        Dim ID As Guid
+        Dim Client As TcpClient
+    End Structure
 
-    Public Sub New(sourceID As Integer)
-        MyBase.New(sourceID)
+    Public Sub New(sourceID As Integer, process As APPProcessor)
+        MyBase.New(sourceID, process)
 
-        InwardQueue = New Dictionary(Of Integer, TcpClient)()
 
         Dim ip As IPAddress
 
@@ -47,17 +42,30 @@ Friend Class TCPProcessSource : Inherits AbstractProcessSource
 
         While True
             Dim client = listeningPort.AcceptTcpClient()
-            InwardQueue.Add(client.GetHashCode(), client)
+
+            Dim procParam As New ProcessParam()
+            procParam.id = MessageProcessQueue.InsertNew()
+            procParam.client = client
+
             processThread = New Thread(AddressOf ProcessResponse)
-            processThread.Start(client)
+            processThread.Start(procParam)
         End While
     End Sub
 
-    Private Sub ProcessResponse(client As TcpClient)
-        Dim data = AppUtil.readStream(client)
+    Private Sub ProcessResponse(param As ProcessParam)
+        Dim data = AppUtil.readStream(param.client)
 
-        AppUtil.writeStream(client, "hello world")
-        client.Close()
+        MessageProcessQueue.addItem(param.ID, "inwardMessage", data)
+
+        For Each dest As AbstractProcessDestination In MainProcess.Destinatons
+            If dest.isValid(param.ID) Then
+                dest.go(param.ID)
+            End If
+        Next
+
+
+        AppUtil.writeStream(param.Client, "hello world")
+        param.Client.Close()
         Thread.CurrentThread.Abort()
         'entire process
 

@@ -5,6 +5,4 @@
     Public db As New OLEDBDataLayer(conn)
     Public logWriterObj As New LogWritter()
 
-
-
 End Module

@@ -51,7 +51,7 @@ Public Class APPProcessor
             If resp.Success Then
                 _newID = ProcessID
                 _newName = resp.Data.Tables(0).Rows(0)("proc_name")
-                _newSrc = SourceFactory.make(resp.Data.Tables(0).Rows(0)("proc_source"))
+                _newSrc = SourceFactory.make(resp.Data.Tables(0).Rows(0)("proc_source"), Me)
 
             End If
 

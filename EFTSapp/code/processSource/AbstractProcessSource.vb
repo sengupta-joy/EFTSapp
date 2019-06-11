@@ -1,4 +1,5 @@
-﻿Imports EFTSapp.code
+﻿Imports EFTSapp
+Imports EFTSapp.code
 
 Public MustInherit Class AbstractProcessSource
 
@@ -6,7 +7,7 @@ Public MustInherit Class AbstractProcessSource
     Private _lu As DateTime
     Private _sourceType As SourceType
     Private _config As Dictionary(Of String, String)
-
+    Private _mainProcess As APPProcessor
 
     Public Property SourceID As Integer
         Get
@@ -16,6 +17,8 @@ Public MustInherit Class AbstractProcessSource
             _sourceID = value
         End Set
     End Property
+
+
 
     Public Property LastUsed As DateTime
         Get
@@ -36,8 +39,18 @@ Public MustInherit Class AbstractProcessSource
         End Get
     End Property
 
-    Public Sub New(sourceID As Integer)
-        _sourceID = sourceID
+    Public Property MainProcess As APPProcessor
+        Get
+            Return _mainProcess
+        End Get
+        Private Set(value As APPProcessor)
+            _mainProcess = value
+        End Set
+    End Property
+
+    Public Sub New(sourceID As Integer, process As APPProcessor)
+        Me.SourceID = sourceID
+        Me.MainProcess = process
         _config = New Dictionary(Of String, String)()
 
         Dim sql As String = "SELECT tbl_config.* FROM tbl_source INNER JOIN tbl_config ON tbl_source.source_id = tbl_config.source_id WHERE (((tbl_source.Source_ID)=" + sourceID.ToString() + "))"
