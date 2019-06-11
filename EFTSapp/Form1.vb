@@ -69,4 +69,8 @@ Public Class Form1
         End If
         GC.Collect()
     End Sub
+
+    Private Sub Form1_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+        End
+    End Sub
 End Class

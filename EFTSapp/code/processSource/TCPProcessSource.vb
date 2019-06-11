@@ -55,7 +55,7 @@ Friend Class TCPProcessSource : Inherits AbstractProcessSource
 
     Private Sub ProcessResponse(client As TcpClient)
         Dim data = AppUtil.readStream(client)
-        Thread.Sleep(1000)
+
         AppUtil.writeStream(client, "hello world")
         client.Close()
         Thread.CurrentThread.Abort()
