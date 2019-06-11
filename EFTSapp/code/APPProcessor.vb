@@ -41,18 +41,18 @@ Public Class APPProcessor
     End Property
 
     Public Sub New(ProcessID As Integer)
-        Try
-            Dim sql As String = "select *                                   " +
-                                        "from   tbl_procs p                         " +
-                                        "       inner join tbl_source s           " +
-                                        "           on p.proc_source=s.source_id    " +
-                                        "where  p.id=" + ProcessID.ToString()
-            Dim resp = db.SelectData(sql)
-            If resp.Success Then
 
-                Dim sourceID = resp.Data.Tables(0).Rows(0)("source_id")
-                Dim sourceType = resp.Data.Tables(0).Rows(0)("source_type")
-                Source = SourceFactory.make(sourceID, sourceType)
+
+
+        Try
+            Dim sql As String = "select * from tbl_procs p where  p.id=" + ProcessID.ToString()
+            Dim resp = db.SelectData(sql)
+
+            If resp.Success Then
+                _newID = ProcessID
+                _newName = resp.Data.Tables(0).Rows(0)("proc_name")
+                _newSrc = SourceFactory.make(resp.Data.Tables(0).Rows(0)("proc_source"))
+
             End If
 
         Catch ex As Exception

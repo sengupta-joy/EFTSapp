@@ -1,5 +1,6 @@
 ﻿Imports System.Threading
 Imports System.Windows.Forms.DataVisualization.Charting
+Imports Microsoft.Diagnostics.Runtime
 
 Public Class Form1
     Dim srv As Service
@@ -7,14 +8,11 @@ Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         srv = New Service()
 
-        'srv.start()
+        srv.start()
         setupUI()
-        'tmrUIRefresh.Enabled = True
 
-        Dim t As New Threading.Thread(AddressOf test)
-        t.Name = "acbd"
-        Dim x = t.ManagedThreadId
-        t.Start()
+        tmrUIRefresh.Enabled = True
+
 
 
     End Sub
@@ -37,6 +35,7 @@ Public Class Form1
 
     Private Sub tmrUIRefresh_Tick(sender As Object, e As EventArgs) Handles tmrUIRefresh.Tick
         Dim x As Process = Process.GetCurrentProcess()
+
         ToolStripStatusLabel1.Text = (My.Application.Info.WorkingSet / 1024).ToString() + "KB"
 
         Dim workerThreads, portThreads As Integer
@@ -44,8 +43,17 @@ Public Class Form1
         ProgressBar1.Maximum = workerThreads
         Threading.ThreadPool.GetAvailableThreads(workerThreads, portThreads)
 
+        For Each t As ProcessThread In x.Threads
+
+
+            If System.Threading.Thread.CurrentThread Is t Then
+                MsgBox(t.Id)
+            End If
+
+        Next
+
         Try
-            ProgressBar1.Value = Process.GetCurrentProcess().Threads.Count
+            ProgressBar1.Value = x.Threads.Count
 
         Catch ex As Exception
 

@@ -48,6 +48,9 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Diagnostics.Runtime, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Diagnostics.Runtime.1.0.5\lib\net45\Microsoft.Diagnostics.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -74,6 +77,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="code\Util\LogWritter.vb" />
+    <Compile Include="code\processSource\DBProcessSource.vb" />
     <Compile Include="code\processDestination\AbstractProcessDestination.vb" />
     <Compile Include="code\appModule.vb" />
     <Compile Include="code\APPProcessor.vb" />
@@ -86,6 +91,7 @@
     <Compile Include="code\factory\SourceFactory.vb" />
     <Compile Include="code\SourceType.vb" />
     <Compile Include="code\DB\SqlResult.vb" />
+    <Compile Include="code\Util\AppUtil.vb" />
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -140,7 +146,6 @@
     <Content Include="config.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="MetroFramework.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
