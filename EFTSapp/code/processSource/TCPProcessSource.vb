@@ -62,6 +62,7 @@ Friend Class TCPProcessSource : Inherits AbstractProcessSource
         Dim doc = New XmlDocument()
         doc.LoadXml(data)
 
+
         For Each dest As AbstractProcessDestination In MainProcess.Destinatons
             If dest.isValid(param.ID) Then
                 dest.go(param.ID)
@@ -81,6 +82,8 @@ Friend Class TCPProcessSource : Inherits AbstractProcessSource
 
 
     Public Overrides Sub reset()
+        Dim parser = New SwiftMessageParser.MTParser()
+        Dim msg As New SwiftMessageParser.SwiftMessage()
 
     End Sub
 End Class

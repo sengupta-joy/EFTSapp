@@ -108,5 +108,21 @@ Public Class Form1
         loadLogs()
     End Sub
 
+    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+        Dim p As New SwiftMessageParser.MTParser()
+        Dim data = IO.File.ReadAllText(Application.StartupPath + "\msg.txt")
+        Dim lst = p.Block4ToList(data)
 
+        Dim x As New SwiftMessageParser.SwiftMessage()
+        ' x.ParseSwiftMessage(data)
+
+        'For Each i In x.Block4
+
+        'Next
+
+        For Each o In lst
+
+        Next
+
+    End Sub
 End Class
