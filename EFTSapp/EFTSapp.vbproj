@@ -142,6 +142,7 @@
     </None>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="x.rar" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="config.accdb">

@@ -1,7 +1,10 @@
 ﻿Imports System.Net
 Imports System.Net.Sockets
 Imports System.Threading
+Imports System.Xml
 Imports EFTSapp
+
+
 
 Friend Class TCPProcessSource : Inherits AbstractProcessSource
 
@@ -44,8 +47,8 @@ Friend Class TCPProcessSource : Inherits AbstractProcessSource
             Dim client = listeningPort.AcceptTcpClient()
             MainProcess.LastExecutionTime = Now
             Dim procParam As New ProcessParam()
-            procParam.id = MessageProcessQueue.InsertNew()
-            procParam.client = client
+            procParam.ID = MessageProcessQueue.InsertNew()
+            procParam.Client = client
 
             processThread = New Thread(AddressOf ProcessResponse)
             processThread.Start(procParam)
@@ -53,15 +56,17 @@ Friend Class TCPProcessSource : Inherits AbstractProcessSource
     End Sub
 
     Private Sub ProcessResponse(param As ProcessParam)
-        Dim data = AppUtil.readStream(param.client)
+        Dim data = AppUtil.readStream(param.Client)
 
         MessageProcessQueue.addItem(param.ID, "inwardMessage", data)
+        Dim doc = New XmlDocument()
+        doc.LoadXml(data)
 
-        'For Each dest As AbstractProcessDestination In MainProcess.Destinatons
-        '    If dest.isValid(param.ID) Then
-        '        dest.go(param.ID)
-        '    End If
-        'Next
+        For Each dest As AbstractProcessDestination In MainProcess.Destinatons
+            If dest.isValid(param.ID) Then
+                dest.go(param.ID)
+            End If
+        Next
 
         data = IO.File.ReadAllText(Application.StartupPath + "\response.xml")
 
