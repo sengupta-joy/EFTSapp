@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<int:sendResponse xmlns:int="http://integration.gwclient.smallsystems.cma.se/">
+  <data>
+    <type>ACK</type>
+    <datetime>1711090736</datetime>
+    <mir>171109BMAGBHBMAEFT0001059687</mir>
+    <ref>KHC102171108002M</ref>
+    <signature></signature>
+  </data>
+</int:sendResponse>

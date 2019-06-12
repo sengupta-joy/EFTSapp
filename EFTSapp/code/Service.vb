@@ -13,7 +13,9 @@
 
 
     Public Sub New()
+        logWriter.write("Loading configuration")
         config = Configuration.getConfig()
+        logWriter.write("Loading configuration completed")
     End Sub
 
     Public Sub start()

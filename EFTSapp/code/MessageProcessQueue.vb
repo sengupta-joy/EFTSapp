@@ -2,10 +2,6 @@
 
     Private Shared _msgQue As Dictionary(Of Guid, Dictionary(Of String, Object))
 
-    Public Shared Function getQueue() As Dictionary(Of Guid, Dictionary(Of String, Object))
-        Return _msgQue
-    End Function
-
     Shared Sub New()
         _msgQue = New Dictionary(Of Guid, Dictionary(Of String, Object))
     End Sub
@@ -26,6 +22,26 @@
         If Not queue Is Nothing Then
             queue.Add(key, value)
         End If
+    End Sub
+
+    Public Shared Sub updateItem(id As Guid, key As String, value As Object)
+        Dim queue = _msgQue.FirstOrDefault(Function(x) x.Key = id).Value
+
+        If Not queue Is Nothing Then
+            queue(key) = value
+        End If
+    End Sub
+
+    Public Shared Sub removeItem(id As Guid, key As String)
+        Dim queue = _msgQue.FirstOrDefault(Function(x) x.Key = id).Value
+
+        If Not queue Is Nothing Then
+            queue.Remove(key)
+        End If
+    End Sub
+
+    Public Shared Sub removeItem(id As Guid)
+        _msgQue.Remove(id)
     End Sub
 End Class
 

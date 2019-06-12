@@ -8,6 +8,7 @@ Public Class APPProcessor
     Private _newName As String
     Private _newSrc As AbstractProcessSource
     Private _newDest As New List(Of AbstractProcessDestination)
+    Private _newExecutionTime As DateTime
 
     Public Property ID As Integer
         Get
@@ -40,6 +41,15 @@ Public Class APPProcessor
         End Get
     End Property
 
+    Public Property LastExecutionTime As Date
+        Get
+            Return _newExecutionTime
+        End Get
+        Set(value As Date)
+            _newExecutionTime = value
+        End Set
+    End Property
+
     Public Sub New(ProcessID As Integer)
 
 
@@ -62,7 +72,9 @@ Public Class APPProcessor
     End Sub
 
     Public Sub start()
+        logWriter.write("Stating process " + Name)
         Source.start()
+        logWriter.write("Process " + Name + " started")
     End Sub
     Public Function restart()
 

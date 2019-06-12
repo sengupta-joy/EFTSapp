@@ -20,12 +20,12 @@ Public Class AppUtil
 
     Public Shared Function writeStream(clnt As TcpClient, data As String) As Boolean
         Dim ns As NetworkStream = clnt.GetStream()
-
+        ns.Flush()
         Try
             Dim myBytes() As Byte = Encoding.ASCII.GetBytes(data)
             ns.Write(myBytes, 0, myBytes.Length)
         Catch ex As Exception
-            logWriterObj.write(ex.Message)
+            logWriter.write(ex.Message)
         End Try
 
 

@@ -42,7 +42,7 @@ Friend Class TCPProcessSource : Inherits AbstractProcessSource
 
         While True
             Dim client = listeningPort.AcceptTcpClient()
-
+            MainProcess.LastExecutionTime = Now
             Dim procParam As New ProcessParam()
             procParam.id = MessageProcessQueue.InsertNew()
             procParam.client = client
@@ -57,14 +57,15 @@ Friend Class TCPProcessSource : Inherits AbstractProcessSource
 
         MessageProcessQueue.addItem(param.ID, "inwardMessage", data)
 
-        For Each dest As AbstractProcessDestination In MainProcess.Destinatons
-            If dest.isValid(param.ID) Then
-                dest.go(param.ID)
-            End If
-        Next
+        'For Each dest As AbstractProcessDestination In MainProcess.Destinatons
+        '    If dest.isValid(param.ID) Then
+        '        dest.go(param.ID)
+        '    End If
+        'Next
 
+        data = IO.File.ReadAllText(Application.StartupPath + "\response.xml")
 
-        AppUtil.writeStream(param.Client, "hello world")
+        AppUtil.writeStream(param.Client, data)
         param.Client.Close()
         Thread.CurrentThread.Abort()
         'entire process

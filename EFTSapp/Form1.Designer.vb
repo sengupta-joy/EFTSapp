@@ -40,7 +40,19 @@ Partial Class Form1
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.tmrUIRefresh = New System.Windows.Forms.Timer(Me.components)
+        Me.btnLogPath = New System.Windows.Forms.Button()
+        Me.lblLogPath = New System.Windows.Forms.Label()
+        Me.lblLogSize = New System.Windows.Forms.Label()
+        Me.nmLogSize = New System.Windows.Forms.NumericUpDown()
+        Me.lblFormat = New System.Windows.Forms.Label()
+        Me.txtLogFormat = New System.Windows.Forms.TextBox()
+        Me.chkLogEnable = New System.Windows.Forms.CheckBox()
+        Me.chkLogChangeDirOnStart = New System.Windows.Forms.CheckBox()
+        Me.btnLogSave = New System.Windows.Forms.Button()
+        Me.fldDlg = New System.Windows.Forms.FolderBrowserDialog()
+        Me.btnClear = New System.Windows.Forms.Button()
         Me.ToolStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -48,6 +60,8 @@ Partial Class Form1
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage3.SuspendLayout()
+        CType(Me.nmLogSize, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ToolStrip1
@@ -89,13 +103,14 @@ Partial Class Form1
         'ToolStripStatusLabel1
         '
         Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(120, 17)
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(121, 17)
         Me.ToolStripStatusLabel1.Text = "ToolStripStatusLabel1"
         '
         'TabControl1
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 25)
         Me.TabControl1.Name = "TabControl1"
@@ -114,7 +129,7 @@ Partial Class Form1
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage1.Size = New System.Drawing.Size(792, 377)
         Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "TabPage1"
+        Me.TabPage1.Text = "Memory"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'Chart1
@@ -174,7 +189,7 @@ Partial Class Form1
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage2.Size = New System.Drawing.Size(792, 377)
         Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "TabPage2"
+        Me.TabPage2.Text = "Process"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'DataGridView1
@@ -188,9 +203,125 @@ Partial Class Form1
         Me.DataGridView1.Size = New System.Drawing.Size(786, 371)
         Me.DataGridView1.TabIndex = 0
         '
+        'TabPage3
+        '
+        Me.TabPage3.Controls.Add(Me.btnClear)
+        Me.TabPage3.Controls.Add(Me.btnLogSave)
+        Me.TabPage3.Controls.Add(Me.chkLogChangeDirOnStart)
+        Me.TabPage3.Controls.Add(Me.chkLogEnable)
+        Me.TabPage3.Controls.Add(Me.txtLogFormat)
+        Me.TabPage3.Controls.Add(Me.lblFormat)
+        Me.TabPage3.Controls.Add(Me.nmLogSize)
+        Me.TabPage3.Controls.Add(Me.lblLogSize)
+        Me.TabPage3.Controls.Add(Me.lblLogPath)
+        Me.TabPage3.Controls.Add(Me.btnLogPath)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage3.Size = New System.Drawing.Size(792, 377)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "Logs"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
         'tmrUIRefresh
         '
         Me.tmrUIRefresh.Interval = 1000
+        '
+        'btnLogPath
+        '
+        Me.btnLogPath.Location = New System.Drawing.Point(9, 20)
+        Me.btnLogPath.Name = "btnLogPath"
+        Me.btnLogPath.Size = New System.Drawing.Size(26, 23)
+        Me.btnLogPath.TabIndex = 0
+        Me.btnLogPath.Text = "..."
+        Me.btnLogPath.UseVisualStyleBackColor = True
+        '
+        'lblLogPath
+        '
+        Me.lblLogPath.AutoSize = True
+        Me.lblLogPath.Location = New System.Drawing.Point(41, 25)
+        Me.lblLogPath.Name = "lblLogPath"
+        Me.lblLogPath.Size = New System.Drawing.Size(57, 13)
+        Me.lblLogPath.TabIndex = 1
+        Me.lblLogPath.Text = "lblLogPath"
+        '
+        'lblLogSize
+        '
+        Me.lblLogSize.AutoSize = True
+        Me.lblLogSize.Location = New System.Drawing.Point(9, 50)
+        Me.lblLogSize.Name = "lblLogSize"
+        Me.lblLogSize.Size = New System.Drawing.Size(91, 13)
+        Me.lblLogSize.TabIndex = 2
+        Me.lblLogSize.Text = "Log max size (KB)"
+        '
+        'nmLogSize
+        '
+        Me.nmLogSize.Location = New System.Drawing.Point(106, 48)
+        Me.nmLogSize.Maximum = New Decimal(New Integer() {102400, 0, 0, 0})
+        Me.nmLogSize.Minimum = New Decimal(New Integer() {1024, 0, 0, 0})
+        Me.nmLogSize.Name = "nmLogSize"
+        Me.nmLogSize.Size = New System.Drawing.Size(120, 20)
+        Me.nmLogSize.TabIndex = 3
+        Me.nmLogSize.Value = New Decimal(New Integer() {1024, 0, 0, 0})
+        '
+        'lblFormat
+        '
+        Me.lblFormat.AutoSize = True
+        Me.lblFormat.Location = New System.Drawing.Point(9, 74)
+        Me.lblFormat.Name = "lblFormat"
+        Me.lblFormat.Size = New System.Drawing.Size(39, 13)
+        Me.lblFormat.TabIndex = 4
+        Me.lblFormat.Text = "Format"
+        '
+        'txtLogFormat
+        '
+        Me.txtLogFormat.Location = New System.Drawing.Point(106, 75)
+        Me.txtLogFormat.Name = "txtLogFormat"
+        Me.txtLogFormat.Size = New System.Drawing.Size(173, 20)
+        Me.txtLogFormat.TabIndex = 5
+        Me.txtLogFormat.Text = "dd/MM/yyyy hh:mm:ss.fff tt"
+        '
+        'chkLogEnable
+        '
+        Me.chkLogEnable.AutoSize = True
+        Me.chkLogEnable.Checked = True
+        Me.chkLogEnable.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkLogEnable.Location = New System.Drawing.Point(12, 108)
+        Me.chkLogEnable.Name = "chkLogEnable"
+        Me.chkLogEnable.Size = New System.Drawing.Size(96, 17)
+        Me.chkLogEnable.TabIndex = 6
+        Me.chkLogEnable.Text = "Enable logging"
+        Me.chkLogEnable.UseVisualStyleBackColor = True
+        '
+        'chkLogChangeDirOnStart
+        '
+        Me.chkLogChangeDirOnStart.AutoSize = True
+        Me.chkLogChangeDirOnStart.Checked = True
+        Me.chkLogChangeDirOnStart.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkLogChangeDirOnStart.Location = New System.Drawing.Point(12, 132)
+        Me.chkLogChangeDirOnStart.Name = "chkLogChangeDirOnStart"
+        Me.chkLogChangeDirOnStart.Size = New System.Drawing.Size(159, 17)
+        Me.chkLogChangeDirOnStart.TabIndex = 7
+        Me.chkLogChangeDirOnStart.Text = "Create new folder on startup"
+        Me.chkLogChangeDirOnStart.UseVisualStyleBackColor = True
+        '
+        'btnLogSave
+        '
+        Me.btnLogSave.Location = New System.Drawing.Point(9, 175)
+        Me.btnLogSave.Name = "btnLogSave"
+        Me.btnLogSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnLogSave.TabIndex = 8
+        Me.btnLogSave.Text = "Save"
+        Me.btnLogSave.UseVisualStyleBackColor = True
+        '
+        'btnClear
+        '
+        Me.btnClear.Location = New System.Drawing.Point(90, 175)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear.TabIndex = 9
+        Me.btnClear.Text = "Reload"
+        Me.btnClear.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -212,6 +343,9 @@ Partial Class Form1
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage3.ResumeLayout(False)
+        Me.TabPage3.PerformLayout()
+        CType(Me.nmLogSize, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -232,4 +366,16 @@ Partial Class Form1
     Friend WithEvents lblThreadCount As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents Chart1 As DataVisualization.Charting.Chart
+    Friend WithEvents TabPage3 As TabPage
+    Friend WithEvents lblLogPath As Label
+    Friend WithEvents btnLogPath As Button
+    Friend WithEvents txtLogFormat As TextBox
+    Friend WithEvents lblFormat As Label
+    Friend WithEvents nmLogSize As NumericUpDown
+    Friend WithEvents lblLogSize As Label
+    Friend WithEvents btnLogSave As Button
+    Friend WithEvents chkLogChangeDirOnStart As CheckBox
+    Friend WithEvents chkLogEnable As CheckBox
+    Friend WithEvents fldDlg As FolderBrowserDialog
+    Friend WithEvents btnClear As Button
 End Class

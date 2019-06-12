@@ -78,7 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="code\MessageProcessQueue.vb" />
-    <Compile Include="code\Util\LogWritter.vb" />
+    <Compile Include="code\Util\LoggingUtility.vb" />
     <Compile Include="code\processSource\DBProcessSource.vb" />
     <Compile Include="code\processDestination\AbstractProcessDestination.vb" />
     <Compile Include="code\appModule.vb" />
@@ -145,6 +145,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="config.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="response.xml">
+      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
