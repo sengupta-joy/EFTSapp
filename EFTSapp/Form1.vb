@@ -105,7 +105,7 @@ Public Class Form1
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-
+        loadLogs()
     End Sub
 
 
