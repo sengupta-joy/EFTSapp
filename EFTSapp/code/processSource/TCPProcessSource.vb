@@ -82,8 +82,6 @@ Friend Class TCPProcessSource : Inherits AbstractProcessSource
 
 
     Public Overrides Sub reset()
-        Dim parser = New SwiftMessageParser.MTParser()
-        Dim msg As New SwiftMessageParser.SwiftMessage()
 
     End Sub
 End Class
