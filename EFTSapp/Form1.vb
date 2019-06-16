@@ -108,5 +108,12 @@ Public Class Form1
         loadLogs()
     End Sub
 
+    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+        Dim parser As New SwiftMessageParser.SwiftMessage()
+        Dim data = IO.File.ReadAllText("C:\Users\Joy\Source\Repos\sengupta-joy\EFTSapp\EFTSapp\msg.txt")
 
+        parser.ParseSwiftMessage(data)
+
+        Me.Text = d.Count
+    End Sub
 End Class
