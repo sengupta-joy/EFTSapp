@@ -6,5 +6,6 @@
         REST_SERVICE = 4
         MQ = 5
         FILE = 6
+        MEMORY = 7
     End Enum
 End Namespace
