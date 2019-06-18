@@ -81,6 +81,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="code\MessageProcessQueue.vb" />
+    <Compile Include="code\Swift\AbsBlock.vb" />
+    <Compile Include="code\Swift\Block2.vb" />
+    <Compile Include="code\Swift\Block1.vb" />
+    <Compile Include="code\Swift\Block3.vb" />
+    <Compile Include="code\Swift\Block4.vb" />
+    <Compile Include="code\Swift\Block5.vb" />
+    <Compile Include="code\Swift\swiftMessage.vb" />
     <Compile Include="code\Util\LoggingUtility.vb" />
     <Compile Include="code\processSource\DBProcessSource.vb" />
     <Compile Include="code\processDestination\AbstractProcessDestination.vb" />
