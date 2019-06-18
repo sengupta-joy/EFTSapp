@@ -109,11 +109,11 @@ Public Class Form1
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
-        Dim parser As New SwiftMessageParser.SwiftMessage()
-        Dim data = IO.File.ReadAllText("C:\Users\Joy\Source\Repos\sengupta-joy\EFTSapp\EFTSapp\msg.txt")
 
-        parser.ParseSwiftMessage(data)
+        Dim data = IO.File.ReadAllText("C:\Users\joy\source\repos\EFTSapp\EFTSapp\msg.txt")
 
-        Me.Text = d.Count
+        Dim sm = swiftMessage.Parse(data)
+
+        Me.Text = sm.Block4.Name
     End Sub
 End Class
